@@ -88,6 +88,7 @@ builder.Services.AddAuthorization(options =>
 
 
 builder.Services.AddScoped<ILocationRepo,LocationRepo>();
+builder.Services.AddScoped<ISkillRepo,SkillRepo>();
 
 var app = builder.Build();
 
