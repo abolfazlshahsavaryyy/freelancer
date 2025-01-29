@@ -18,13 +18,13 @@ namespace Freelancer.Repository
             var locations=await _context.Locations.ToListAsync();
             return locations;
         }
-        public async Task<StatusActionRepocs> Create(Location locaton)
+        public async Task<RepositoryResult> Create(Location locaton)
         {
             try
             {
                 await _context.Locations.AddAsync(locaton);
                 await _context.SaveChangesAsync();
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     IsSucess = true,
                     Message = "Location add successfully"
@@ -32,7 +32,7 @@ namespace Freelancer.Repository
             }
             catch (Exception ex)
             {
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     IsSucess= false,
                     Message = ex.Message
@@ -41,11 +41,11 @@ namespace Freelancer.Repository
 
         }
 
-        public async Task<StatusActionRepocs> Update(Location location,string newName)
+        public async Task<RepositoryResult> Update(Location location,string newName)
         {
             location.LocationName = newName.ToLower();
             _context.SaveChanges();
-            return new StatusActionRepocs
+            return new RepositoryResult
             {
                 IsSucess = false,
                 Message = "Location name changed"
@@ -58,13 +58,13 @@ namespace Freelancer.Repository
             return locations.Where(l=>l.LocationName == locationName).FirstOrDefault();
         }
 
-        public async Task<StatusActionRepocs> Delete(Location location)
+        public async Task<RepositoryResult> Delete(Location location)
         {
             try
             {
                 _context.Locations.Remove(location);
                 _context.SaveChanges();
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     IsSucess = true,
                     Message = "location deleted successfully"
@@ -72,7 +72,7 @@ namespace Freelancer.Repository
             }
             catch (Exception ex)
             {
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     IsSucess = false,
                     Message = ex.Message

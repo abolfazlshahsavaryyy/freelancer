@@ -13,13 +13,13 @@ namespace Freelancer.Repository
         {
             _context = context;
         }
-        public async Task<StatusActionRepocs> Create(Skill skill)
+        public async Task<RepositoryResult> Create(Skill skill)
         {
             try
             {
                 await _context.AddAsync(skill);
                 await _context.SaveChangesAsync();
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     Message = "skill added",
                     IsSucess=true,
@@ -27,7 +27,7 @@ namespace Freelancer.Repository
             }
             catch (Exception ex)
             {
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     Message = ex.Message,
                     IsSucess = false,
@@ -37,14 +37,14 @@ namespace Freelancer.Repository
 
         }
 
-        public async Task<StatusActionRepocs> Delete(Skill skill)
+        public async Task<RepositoryResult> Delete(Skill skill)
         {
             try
             {
                
                 _context.Remove(skill);
                 await _context.SaveChangesAsync();
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     Message = "Skill removed",
                     IsSucess = true,
@@ -54,7 +54,7 @@ namespace Freelancer.Repository
             }
             catch (Exception ex)
             {
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     Message = ex.Message,
                     IsSucess = false,
@@ -90,12 +90,12 @@ namespace Freelancer.Repository
 
        
 
-        public async Task<StatusActionRepocs> Update(string skillName, int id)
+        public async Task<RepositoryResult> Update(string skillName, int id)
         {
             var existingSkill=await _context.Skills.FindAsync(id);
             if (existingSkill == null)
             {
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     IsSucess = false,
                     Message = "can't find the skill"
@@ -105,7 +105,7 @@ namespace Freelancer.Repository
             try
             {
                 await _context.SaveChangesAsync();
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     IsSucess = true,
                     Message = "skill name update"
@@ -113,7 +113,7 @@ namespace Freelancer.Repository
             }
             catch (Exception ex)
             {
-                return new StatusActionRepocs
+                return new RepositoryResult
                 {
                     IsSucess = false,
                     Message = ex.Message,

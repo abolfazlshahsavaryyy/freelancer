@@ -7,8 +7,8 @@ namespace Freelancer.Repository.Interface
     {
         Task<List<Location>> GetAll();
         Task<Location> GetByName(string locationName);
-        Task<StatusActionRepocs> Create(Location location);
-        Task<StatusActionRepocs> Delete(Location location);
-        Task<StatusActionRepocs> Update(Location location,string newName);
+        Task<RepositoryResult> Create(Location location);
+        Task<RepositoryResult> Delete(Location location);
+        Task<RepositoryResult> Update(Location location,string newName);
     }
 }

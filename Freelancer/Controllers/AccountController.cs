@@ -1,4 +1,4 @@
-﻿using Freelancer.Dtos;
+﻿using Freelancer.Dtos.Auth;
 using Freelancer.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
